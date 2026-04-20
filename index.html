@@ -286,7 +286,6 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
   <div class="nav-links">
     <a href="#" id="n-home" class="active" onclick="go('home')"><span>Inicio</span></a>
     <a href="#" id="n-pedido" onclick="go('pedido')"><span>Hacer pedido</span></a>
-    <a href="#" id="n-admin" onclick="go('admin')"><span>Admin</span></a>
   </div>
   <div class="nav-links">
     <a href="tel:+34647177408" class="nav-cta">📞 <span>Llámanos</span></a>
@@ -312,7 +311,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
       <p>No solo vendemos productos — te guiamos para usarlos como una profesional. Más de 20 años de experiencia a tu lado.</p>
       <div class="ha">
         <button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button>
-        <a href="#asesoria" class="btn bo">Cómo te ayudamos</a>
+        <button class="btn bo" onclick="document.getElementById('asesoria').scrollIntoView({behavior:'smooth'})">Cómo te ayudamos</button>
       </div>
       <div class="hero-stats">
         <div><div class="sn">+20</div><div class="sl">Años de experiencia</div></div>
@@ -387,6 +386,12 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
         <div class="rc"><div class="rt"><div class="ra" style="background:#6B2E22">RM</div><div><div class="rn">Raquel Morales</div><div class="rd">Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Muy profesionales y trato excelente, los productos increíbles.</p></div>
         <div class="rc"><div class="rt"><div class="ra" style="background:#B0720A">EG</div><div><div class="rn">E. Gabella (gabe95)</div><div class="rd">Local Guide · Hace un año</div></div></div><div class="rst">★★★★★</div><p class="rx">Muy profesionales y personal atento.</p></div>
         <div class="rc"><div class="rt"><div class="ra" style="background:#3B6099">EB</div><div><div class="rn">Estela Bernat</div><div class="rd">Local Guide · Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Super amables. Me trajeron un tinte que no encontraba en ningún sitio.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#2E7D6B">IR</div><div><div class="rn">Irene Riego</div><div class="rd">Hace 2 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Trato excepcional!</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#5C3A8A">RG</div><div><div class="rn">Raquel Garcia</div><div class="rd">Hace 3 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Excelente atención y productos.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#7AAD3A">MC</div><div><div class="rn">Myriam Carreras</div><div class="rd">Local Guide · Hace 3 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Me encanta, siempre super bien y tienen de todo. Excelente.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#A0522D">AX</div><div><div class="rn">Alicia Xarau</div><div class="rd">Hace 8 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Por sus productos tan buenos.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#1A6B8A">LM</div><div><div class="rn">Laura Moya Torres</div><div class="rd">Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Buenos productos y asesoramiento muy profesionales.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#6B4E22">RA</div><div><div class="rn">Ricardo Aparicio Xarau</div><div class="rd">Local Guide · Hace 8 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Por la atención individualizada e información.</p></div>
       </div></div>
       <div class="cn" id="cdots"></div>
     </div>
@@ -411,8 +416,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
       <div class="nt">Una vez enviado, Sílvia lo confirmará y te avisará cuando esté listo para recoger.</div>
       <div class="fr">
         <div class="fg"><label>Nombre y apellido *</label><input type="text" id="cname" placeholder="Ej: Maria Garcia"></div>
-        <div class="fg"><label>Fecha de recogida *</label><input type="date" id="pdate"></div>
-      </div>
+        <div class="fg"><label>Fecha de recogida *</label><input type="date" id="pdate"></div>      </div>
       <div class="fg"><label>Teléfono (opcional)</label><input type="tel" id="cphone" placeholder="Por si hay que contactarte"></div>
       <div class="fg"><label>Notas adicionales</label><input type="text" id="cnotes" placeholder="Ej: prefiero mañana, alergias..."></div>
       <div class="cs">
@@ -434,128 +438,33 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
   </div>
 </div>
 
-<!-- ══════════════════ ADMIN ══════════════════ -->
-<div id="p-admin" class="page">
-  <div id="alogview">
-    <div class="alw"><div class="alc">
-      <h2>🔐 Acceso Admin</h2>
-      <p>Introduce la contraseña para gestionar el catálogo de productos.</p>
-      <input type="password" id="apass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')chkA()">
-      <button class="btn bg" style="width:100%;justify-content:center;padding:12px" onclick="chkA()">Entrar</button>
-      <p id="aerr" class="em"></p>
-    </div></div>
-  </div>
-
-  <div id="apanel" style="display:none">
-    <div class="ato"><div class="atoi">
-      <h2>Panel de Administración</h2>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span id="src-badge" style="font-size:.74rem;padding:4px 10px;border-radius:50px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.55)">⏳ cargando...</span>
-        <button class="btn bo sm" onclick="alogout()">Cerrar sesión</button>
-      </div>
-    </div></div>
-
-    <div class="aby">
-      <div class="tabs">
-        <button class="tab act" onclick="swTab(0)">📝 Añadir / editar uno a uno</button>
-        <button class="tab" onclick="swTab(1)">📄 Editar products.txt</button>
-      </div>
-
-      <!-- TAB 0: MANUAL -->
-      <div id="tab0" class="tpanel act">
-        <div class="ag">
-          <div class="ac">
-            <h3>➕ Añadir producto</h3>
-            <div class="fg"><label>Marca *</label>
-              <select id="abrand" onchange="document.getElementById('cbg').style.display=this.value==='__c__'?'block':'none'">
-                <option value="">— Selecciona —</option>
-                <option>Schwarzkopf</option><option>Wella</option><option>L'Oréal Professional</option>
-                <option>Redken</option><option>Revlon Professional</option><option>Goldwell</option>
-                <option>Indola</option><option>Kerastase</option><option>Paul Mitchell</option>
-                <option value="__c__">Otra marca...</option>
-              </select>
-            </div>
-            <div class="fg" id="cbg" style="display:none"><label>Nombre de la marca</label><input type="text" id="abrandc" placeholder="Escribe la marca"></div>
-            <div class="fg"><label>Gama / Línea (opcional)</label><input type="text" id="arange" placeholder="Ej: Igora Royal, Color Touch..."></div>
-            <div class="fg"><label>Número / Referencia *</label><input type="text" id="anum" placeholder="Ej: 7/1, 4N, 6.3..."></div>
-            <div class="fg"><label>Descripción (opcional)</label><input type="text" id="adesc" placeholder="Ej: Rubio Ceniza Medio"></div>
-            <div class="fg"><label>Precio (€) *</label><input type="number" id="aprice" placeholder="Ej: 8.50" step="0.01" min="0"></div>
-            <button class="btn bg" style="width:100%;justify-content:center" onclick="addProd()">Añadir producto</button>
-            <p id="amsg" class="msgt"></p>
-          </div>
-          <div class="ac">
-            <h3>Catálogo <span class="bco" id="pcnt">0</span>
-              <input class="srch" type="text" id="asrch" placeholder="Buscar..." oninput="renderAL()">
-            </h3>
-            <div class="fb2" id="afilt"></div>
-            <div style="overflow-x:auto">
-              <table class="tbl"><thead><tr><th>Marca</th><th>Gama</th><th>Núm.</th><th>Descripción</th><th style="text-align:right">Precio</th><th></th></tr></thead>
-              <tbody id="atbody"></tbody></table>
-            </div>
-            <p id="aempty" class="empt">Aún no hay productos.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 1: TXT -->
-      <div id="tab1" class="tpanel">
-        <div class="ac">
-          <h3>📄 Editor de products.txt</h3>
-          <div class="txt-info">
-            <strong>Formato:</strong> <code>MARCA;GAMA;NUMERO;DESCRIPCION;PRECIO</code> — una línea por producto.<br>
-            Las líneas que empiezan por <code>#</code> son comentarios. La GAMA y DESCRIPCION pueden estar vacías.<br>
-            <strong>Flujo:</strong> edita aquí → pulsa <em>"Aplicar cambios"</em> para actualizar el catálogo en esta sesión → pulsa <em>"Descargar products.txt"</em> para guardar el fichero → súbelo a la carpeta del proyecto.
-          </div>
-          <textarea class="txta" id="txta" spellcheck="false"></textarea>
-          <div class="txta-wrap">
-            <button class="btn bg sm" onclick="applyTxt()">✓ Aplicar cambios</button>
-            <button class="btn bd sm" onclick="dlTxt()">⬇ Descargar products.txt</button>
-            <span class="sync-note" id="sync-note">Los cambios se aplican al catálogo de esta sesión. Para hacerlos permanentes, descarga el fichero y reemplaza <strong>products.txt</strong> en tu carpeta.</span>
-          </div>
-          <p id="txmsg" class="msgt" style="margin-top:.6rem"></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 // ── CONFIG ──
-const PASS = 'silvia2025';
 const WA_PHONE = '34647177408';
 
 // ── STATE ──
-let prods = [];   // source of truth: loaded from products.txt, then overridden by localStorage if newer
+let prods = [];
 let cart = [];
-let af = '';
 let cp = 0;
 let carTimer;
 
-// ── LOAD PRODUCTS ──
-// Priority: localStorage (manual edits) > products.txt
+// ── SET TODAY AS MIN DATE ──
+function setMinDate() {
+  const today = new Date().toISOString().split('T')[0];
+  const el = document.getElementById('pdate');
+  if (el) el.min = today;
+}
+
+// ── LOAD PRODUCTS FROM products.txt ──
 async function loadProducts() {
-  const stored = localStorage.getItem('sv_prods');
-  let fromTxt = [];
   try {
     const r = await fetch('products.txt?v=' + Date.now());
     if (r.ok) {
       const txt = await r.text();
-      fromTxt = parseTxt(txt);
-      setBadge('✅ products.txt cargado', '#4E7A1A');
+      prods = parseTxt(txt);
     }
-  } catch(e) { setBadge('📂 Archivo local', '#7A6855'); }
-
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored);
-      // If localStorage has more or equal products, prefer it (manual edits win)
-      prods = parsed.length >= fromTxt.length ? parsed : fromTxt;
-      if (fromTxt.length > parsed.length) localStorage.setItem('sv_prods', JSON.stringify(prods));
-    } catch(e) { prods = fromTxt; }
-  } else {
-    prods = fromTxt;
-    if (fromTxt.length) localStorage.setItem('sv_prods', JSON.stringify(prods));
-  }
+  } catch(e) { console.warn('products.txt no encontrado'); }
 }
 
 function parseTxt(txt) {
@@ -569,29 +478,9 @@ function parseTxt(txt) {
     const [b, r, n, d, p] = parts.map(x => x.trim());
     const price = parseFloat(p);
     if (!b || !n || isNaN(price)) continue;
-    result.push({ id: b + '_' + r + '_' + n + '_' + Date.now() + Math.random(), b, r: r||'', n, d: d||'', p: price });
+    result.push({ id: 'p' + result.length + '_' + b.replace(/\s/g,'') + n.replace(/\W/g,''), b, r: r||'', n, d: d||'', p: price });
   }
-  // Fix IDs for stability
-  return result.map((x, i) => ({ ...x, id: 'p' + i + '_' + x.b.replace(/\s/g,'') + x.n.replace(/\W/g,'') }));
-}
-
-function prodsToTxt() {
-  let out = '# CATÁLOGO SÍLVIA COMERCIAL\n# Formato: MARCA;GAMA;NUMERO;DESCRIPCION;PRECIO\n\n';
-  const brands = [...new Set(prods.map(p => p.b))];
-  for (const brand of brands) {
-    out += `# ${brand}\n`;
-    prods.filter(p => p.b === brand).forEach(p => {
-      out += `${p.b};${p.r};${p.n};${p.d};${p.p.toFixed(2)}\n`;
-    });
-    out += '\n';
-  }
-  return out;
-}
-
-function save() { localStorage.setItem('sv_prods', JSON.stringify(prods)); }
-function setBadge(txt, color) {
-  const b = document.getElementById('src-badge');
-  if (b) { b.textContent = txt; b.style.color = color; }
+  return result;
 }
 
 // ── NAV ──
@@ -601,8 +490,7 @@ function go(name) {
   document.getElementById('p-' + name).classList.add('active');
   const l = document.getElementById('n-' + name);
   if (l) l.classList.add('active');
-  if (name === 'admin') renderAF();
-  if (name === 'pedido') renderCart();
+  if (name === 'pedido') { renderCart(); setMinDate(); }
   window.scrollTo(0, 0);
 }
 
@@ -695,104 +583,15 @@ function sendWA(e) {
   window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ── ADMIN AUTH ──
-function chkA() {
-  if (document.getElementById('apass').value === PASS) {
-    document.getElementById('alogview').style.display = 'none';
-    document.getElementById('apanel').style.display = 'block';
-    renderAF(); syncTxtArea();
-  } else { document.getElementById('aerr').textContent = 'Contraseña incorrecta.'; }
-}
-function alogout() {
-  document.getElementById('alogview').style.display = 'block';
-  document.getElementById('apanel').style.display = 'none';
-  document.getElementById('apass').value = '';
-}
-
-// ── ADMIN TABS ──
-function swTab(i) {
-  document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('act', i === j));
-  document.querySelectorAll('.tpanel').forEach((p, j) => p.classList.toggle('act', i === j));
-  if (i === 1) syncTxtArea();
-}
-
-// ── ADMIN MANUAL ──
-function addProd() {
-  const bs = document.getElementById('abrand').value;
-  const b = bs === '__c__' ? document.getElementById('abrandc').value.trim() : bs;
-  const r = document.getElementById('arange').value.trim();
-  const n = document.getElementById('anum').value.trim();
-  const d = document.getElementById('adesc').value.trim();
-  const p = parseFloat(document.getElementById('aprice').value);
-  const msg = document.getElementById('amsg');
-  if (!b || !n || isNaN(p)) { msg.style.color = '#c00'; msg.textContent = '⚠ Marca, número y precio son obligatorios.'; return; }
-  prods.push({ id: 'p' + Date.now(), b, r, n, d, p });
-  save();
-  ['abrand', 'abrandc', 'arange', 'anum', 'adesc', 'aprice'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('cbg').style.display = 'none';
-  msg.style.color = 'var(--gd)'; msg.textContent = '✓ Producto añadido!';
-  setTimeout(() => msg.textContent = '', 2500);
-  renderAF();
-}
-function delProd(id) {
-  if (!confirm('¿Eliminar este producto?')) return;
-  prods = prods.filter(p => p.id !== id); save(); renderAF();
-}
-function setAF(b) { af = b; renderAF(); }
-function renderAF() {
-  const brands = [...new Set(prods.map(p => p.b))];
-  document.getElementById('afilt').innerHTML =
-    `<button class="fbtn ${!af ? 'act' : ''}" onclick="setAF('')">Todos</button>` +
-    brands.map(b => `<button class="fbtn ${af === b ? 'act' : ''}" onclick="setAF('${b.replace(/'/g,"\\'")}')">` + b + `</button>`).join('');
-  renderAL();
-}
-function renderAL() {
-  const q = (document.getElementById('asrch')?.value || '').toLowerCase();
-  let list = af ? prods.filter(p => p.b === af) : [...prods];
-  if (q) list = list.filter(p => (p.b + p.r + p.n + p.d).toLowerCase().includes(q));
-  document.getElementById('pcnt').textContent = prods.length;
-  const empty = document.getElementById('aempty'), tbody = document.getElementById('atbody');
-  if (!list.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  tbody.innerHTML = list.map(p =>
-    `<tr>
-      <td><strong>${p.b}</strong></td>
-      <td style="color:var(--mu)">${p.r || '—'}</td>
-      <td><span style="font-weight:700;color:var(--gd)">${p.n}</span></td>
-      <td style="color:var(--mu)">${p.d || '—'}</td>
-      <td style="text-align:right;font-weight:700">${p.p.toFixed(2)} €</td>
-      <td><button class="dbtn" onclick="delProd('${p.id}')">🗑</button></td>
-    </tr>`).join('');
-}
-
-// ── ADMIN TXT ──
-function syncTxtArea() {
-  document.getElementById('txta').value = prodsToTxt();
-}
-function applyTxt() {
-  const txt = document.getElementById('txta').value;
-  const parsed = parseTxt(txt);
-  const msg = document.getElementById('txmsg');
-  if (!parsed.length) { msg.style.color = '#c00'; msg.textContent = '⚠ No se encontraron productos válidos. Revisa el formato.'; return; }
-  prods = parsed; save(); renderAF();
-  msg.style.color = 'var(--gd)';
-  msg.textContent = `✓ ${parsed.length} productos cargados y guardados en esta sesión.`;
-  setTimeout(() => msg.textContent = '', 3000);
-}
-function dlTxt() {
-  const txt = document.getElementById('txta').value;
-  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'products.txt'; a.click();
-  URL.revokeObjectURL(a.href);
-}
-
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', async () => {
   await loadProducts();
+  setMinDate();
   initCar();
   window.addEventListener('resize', updCar);
 });
+
+</script>
 </script>
 </body>
 </html>
