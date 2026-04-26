@@ -311,6 +311,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
       <p>No solo vendemos productos — te guiamos para usarlos como una profesional. Más de 20 años de experiencia a tu lado.</p>
       <div class="ha">
         <button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button>
+        <a class="btn bo" href="hair-swatch-test.html">Probar simulador de color</a>
         <button class="btn bo" onclick="document.getElementById('asesoria').scrollIntoView({behavior:'smooth'})">Cómo te ayudamos</button>
       </div>
       <div class="hero-stats">
@@ -364,7 +365,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
         <div class="pc"><div class="pim" style="padding:0"><img src="img/img-secadores.webp" alt="Secadores y herramientas profesionales" style="width:100%;height:100%;object-fit:cover;object-position:center center"></div><div class="pin"><div class="pca">Herramientas</div><div class="pna">Secadores y maquinaria</div><div class="pde">Secadores profesionales, planchas, cortadoras y accesorios de alta gama</div></div></div>
         <div class="pc"><div class="pim" style="padding:0"><img src="img/img-maquinas.webp" alt="Máquinas de corte profesionales" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><div class="pin"><div class="pca">Maquinaria</div><div class="pna">Cortadoras profesionales</div><div class="pde">Máquinas de corte y perfilado para barbería y peluquería profesional</div></div></div>
       </div>
-      <div class="ctab"><h3>¿Necesitas tintes? Haz tu pedido aquí</h3><p>Selecciona del catálogo y lo tendremos listo para recoger cuando quieras.</p><button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button></div>
+      <div class="ctab"><h3>¿Necesitas tintes? Haz tu pedido aquí</h3><p>Selecciona del catálogo y lo tendremos listo para recoger cuando quieras.</p><button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button> <a class="btn bo" href="hair-swatch-test.html">Probar simulador</a></div>
     </div>
   </div>
 
@@ -794,11 +795,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadProducts();
   setMinDate();
   bindDraftFields();
+  const forcedOrder = sessionStorage.getItem('silvia-open-order') === '1' || window.location.hash === '#p-pedido' || window.location.hash === '#pedido';
+  if (forcedOrder) sessionStorage.removeItem('silvia-open-order');
   const page = restoreDraft();
   renderCatalog();
   renderOxidants();
   renderCart();
-  if (page === 'pedido') go('pedido');
+  if (forcedOrder || page === 'pedido') go('pedido');
   initCar();
   window.addEventListener('resize', updCar);
 });
