@@ -26,9 +26,7 @@ body{font-family:var(--fb);background:var(--cr);color:var(--tx);overflow-x:hidde
   padding:20px 2rem;border-bottom:3px solid var(--g);
   position:relative;
 }
-.logo-header img{height:100px;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(0,0,0,.5))}
-.lh-text h1{font-family:var(--ff);font-size:2rem;color:#fff;font-weight:700;line-height:1.1}
-.lh-text p{font-size:.72rem;color:var(--gl);letter-spacing:.22em;text-transform:uppercase;margin-top:4px}
+.logo-header img{height:130px;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(0,0,0,.5))}
 .lh-contact{position:absolute;right:2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .lh-contact a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:5px;transition:color .2s}
 .lh-contact a:hover{color:#fff}
@@ -52,9 +50,7 @@ nav{
 .hero{position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:var(--b)}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(140deg,#1a0606 0%,#4a1c0c 55%,#2d4a10 100%)}
 .hero-img-panel{position:absolute;right:0;top:0;bottom:0;width:50%;overflow:hidden}
-.ph-panel{width:100%;height:100%;background:linear-gradient(160deg,#2a1008 0%,#5a2e18 45%,#4a6a18 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.ph-panel svg{opacity:.12}
-.ph-panel span{color:rgba(255,255,255,.18);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+.ph-panel{display:none}.phi{display:none}
 .hero-ov{position:absolute;right:0;top:0;bottom:0;width:56%;background:linear-gradient(to right,#1a0606 0%,transparent 65%);z-index:1}
 .hero-content{position:relative;z-index:2;max-width:580px;padding:70px 2.5rem}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(122,173,58,.14);border:1px solid rgba(122,173,58,.28);color:var(--gl);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:1.8rem}
@@ -252,14 +248,12 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
 }
 @media(max-width:640px){
   nav{padding:0 1rem}
-  .nav-links a span{display:none}
   .nav-links a{padding:10px 10px}
   .sec,.pb,.rs,.is,.brs{padding-left:1.2rem;padding-right:1.2rem}
   .fr{grid-template-columns:1fr}
   .rc{min-width:260px;max-width:260px}
   .logo-header{padding:14px 1.2rem;gap:12px}
-  .logo-header img{height:68px}
-  .lh-text h1{font-size:1.4rem}
+  .logo-header img{height:80px}
 }
 </style>
 </head>
@@ -267,11 +261,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
 
 <!-- ══════════ LOGO HEADER ══════════ -->
 <header class="logo-header">
-  <img src="Logotipo.png" alt="Sílvia Comercial">
-  <div class="lh-text">
-    <h1>Sílvia Comercial</h1>
-    <p>Perruqueria i Estètica · Caldes de Montbui</p>
-  </div>
+  <img src="img/Logotipo.png" alt="Sílvia Comercial">
   <div class="lh-contact">
     <a href="tel:+34647177408" class="lh-phone">📞 +34 647 177 408</a>
     <a href="https://wa.me/34647177408" target="_blank">
@@ -284,7 +274,6 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
 <!-- ══════════ NAV ══════════ -->
 <nav>
   <div class="nav-links">
-    <a href="#" id="n-home" class="active" onclick="go('home')"><span>Inicio</span></a>
     <a href="#" id="n-pedido" onclick="go('pedido')"><span>Hacer pedido</span></a>
   </div>
   <div class="nav-links">
@@ -298,11 +287,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-img-panel">
-      <div class="ph-panel">
-        <!-- ★ Reemplaza por: <img src="interior.jpg" style="width:100%;height:100%;object-fit:cover"> -->
-        <svg width="70" height="70" viewBox="0 0 24 24" fill="white"><path d="M21 6.5c0-2.5-2-4.5-4.5-4.5S12 4 12 6.5V21h3V13h3v8h3V6.5zM9 3H3v18h3v-7h3V3z"/></svg>
-        <span>Foto interior tienda</span>
-      </div>
+      <img src="img/img-tienda.webp" alt="Interior tienda Sílvia Comercial" style="width:100%;height:100%;object-fit:cover;object-position:center top">
     </div>
     <div class="hero-ov"></div>
     <div class="hero-content">
@@ -324,11 +309,7 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
   <section class="sec" id="asesoria">
     <div class="wg">
       <div class="wi">
-        <div class="phi">
-          <!-- ★ Reemplaza por: <img src="tienda.jpg" style="width:100%;height:100%;object-fit:cover"> -->
-          <svg width="54" height="54" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M20 4H4v2l8 5 8-5V4zM4 20h16V8l-8 5-8-5v12z"/></svg>
-          <span>Foto interior tienda</span>
-        </div>
+        <img src="img/img-tratamientos.webp" alt="Productos en tienda" style="width:100%;height:100%;object-fit:cover;object-position:center">
         <div class="wb"><strong>+20</strong><span style="font-size:.76rem;color:rgba(255,255,255,.44)">años asesorando</span></div>
       </div>
       <div>
@@ -362,10 +343,11 @@ textarea.txta:focus{outline:none;border-color:var(--g)}
       <h2 class="st">Productos <em>de primera calidad</em></h2>
       <p class="ss">Seleccionamos cada producto por su rendimiento y fiabilidad en uso profesional.</p>
       <div class="pg">
-        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M9 3v11c0 2.21 1.79 4 4 4s4-1.79 4-4V3h-2v7h-4V3H9z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Tintes</div><div class="pna">Coloración permanente</div><div class="pde">Cobertura total, larga duración y brillo excepcional</div></div></div>
-        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M17 8C8 10 5.9 16.17 3.82 21h2.71l1-2h3l1 2h2.71C12 16 14.97 9.4 22 9l-5-1z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Decoloración</div><div class="pna">Decolorantes profesionales</div><div class="pde">Acción controlada para resultados seguros y uniformes</div></div></div>
-        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm-1 14H9V8h2v9zm4 0h-2V8h2v9z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Tratamientos</div><div class="pna">Keratinas y nutrición</div><div class="pde">Hidratación profunda y reestructuración capilar</div></div></div>
-        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M20 6h-1V4c0-1.1-.9-2-2-2H7C5.9 2 5 2.9 5 4v2H4c-1.1 0-2 .9-2 2v4c0 1.65 1.35 3 3 3h1c0 2.21 1.79 4 4 4h4c2.21 0 4-1.79 4-4h1c1.65 0 3-1.35 3-3V8c0-1.1-.9-2-2-2z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Herramientas</div><div class="pna">Equipamiento profesional</div><div class="pde">Secadores, planchas y accesorios de alta gama</div></div></div>
+        <div class="pc"><div class="pim" style="padding:0"><img src="img/img-tintes.jpg" alt="Tintes semipermanentes Erayba CoolColor" style="width:100%;height:100%;object-fit:cover;object-position:center"></div><div class="pin"><div class="pca">Tintes y coloración</div><div class="pna">Coloración profesional</div><div class="pde">Permanente, semipermanente y colores fantasía para todos los estilos</div></div></div>
+        <div class="pc"><div class="pim" style="padding:0"><img src="img/img-tienda.webp" alt="Amplia selección de productos" style="width:100%;height:100%;object-fit:cover;object-position:left top"></div><div class="pin"><div class="pca">Decoloración</div><div class="pna">Decolorantes y oxidantes</div><div class="pde">Acción controlada para resultados seguros, uniformes y luminosos</div></div></div>
+        <div class="pc"><div class="pim" style="padding:0"><img src="img/img-tratamientos.webp" alt="Tratamientos capilares" style="width:100%;height:100%;object-fit:cover;object-position:right center"></div><div class="pin"><div class="pca">Tratamientos</div><div class="pna">Keratinas y nutrición</div><div class="pde">Hidratación profunda, reestructuración y reparación capilar</div></div></div>
+        <div class="pc"><div class="pim" style="padding:0"><img src="img/img-secadores.webp" alt="Secadores y herramientas profesionales" style="width:100%;height:100%;object-fit:cover;object-position:center center"></div><div class="pin"><div class="pca">Herramientas</div><div class="pna">Secadores y maquinaria</div><div class="pde">Secadores profesionales, planchas, cortadoras y accesorios de alta gama</div></div></div>
+        <div class="pc"><div class="pim" style="padding:0"><img src="img/img-maquinas.webp" alt="Máquinas de corte profesionales" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><div class="pin"><div class="pca">Maquinaria</div><div class="pna">Cortadoras profesionales</div><div class="pde">Máquinas de corte y perfilado para barbería y peluquería profesional</div></div></div>
       </div>
       <div class="ctab"><h3>¿Necesitas tintes? Haz tu pedido aquí</h3><p>Selecciona del catálogo y lo tendremos listo para recoger cuando quieras.</p><button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button></div>
     </div>
