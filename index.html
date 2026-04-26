@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sílvia Comercial – Perruqueria i Estètica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#7AAD3A;--gd:#4E7A1A;--gl:#d4e9a8;--g2:#e8f4cc;
+  --b:#3B1515;--bm:#6B2E22;--bl:#c4906a;
+  --cr:#FAFAF7;--cd:#EEE9DC;--c2:#F5F2EB;
+  --tx:#1E1208;--mu:#7A6855;--li:#B0A090;
+  --ff:'Cormorant Garamond',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --r:14px;--r2:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cr);color:var(--tx);overflow-x:hidden}
+
+/* ══ LOGO HEADER ══ */
+.logo-header{
+  background:var(--b);
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  padding:20px 2rem;border-bottom:3px solid var(--g);
+  position:relative;
+}
+.logo-header img{height:100px;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(0,0,0,.5))}
+.lh-text h1{font-family:var(--ff);font-size:2rem;color:#fff;font-weight:700;line-height:1.1}
+.lh-text p{font-size:.72rem;color:var(--gl);letter-spacing:.22em;text-transform:uppercase;margin-top:4px}
+.lh-contact{position:absolute;right:2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.lh-contact a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:5px;transition:color .2s}
+.lh-contact a:hover{color:#fff}
+.lh-phone{color:var(--gl)!important;font-size:1rem!important;font-weight:700!important}
+
+/* ══ NAV ══ */
+nav{
+  position:sticky;top:0;z-index:200;background:rgba(59,21,21,.97);
+  backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.78rem;font-weight:500;padding:12px 14px;border-radius:8px;transition:all .2s;letter-spacing:.08em;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
+.nav-cta{background:var(--g)!important;color:#fff!important;margin-left:8px!important;padding:9px 18px!important;border-radius:50px!important;font-weight:600!important}
+.nav-cta:hover{background:var(--gd)!important}
+
+.page{display:none}.page.active{display:block}
+
+/* ══ HERO ══ */
+.hero{position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:var(--b)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(140deg,#1a0606 0%,#4a1c0c 55%,#2d4a10 100%)}
+.hero-img-panel{position:absolute;right:0;top:0;bottom:0;width:50%;overflow:hidden}
+.ph-panel{width:100%;height:100%;background:linear-gradient(160deg,#2a1008 0%,#5a2e18 45%,#4a6a18 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.ph-panel svg{opacity:.12}
+.ph-panel span{color:rgba(255,255,255,.18);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+.hero-ov{position:absolute;right:0;top:0;bottom:0;width:56%;background:linear-gradient(to right,#1a0606 0%,transparent 65%);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:580px;padding:70px 2.5rem}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(122,173,58,.14);border:1px solid rgba(122,173,58,.28);color:var(--gl);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:1.8rem}
+.hero-tag i{width:5px;height:5px;border-radius:50%;background:var(--g);display:inline-block}
+.hero h1{font-family:var(--ff);font-size:clamp(2.3rem,4.5vw,3.8rem);color:#fff;line-height:1.1;margin-bottom:1.2rem;font-weight:600}
+.hero h1 em{color:var(--gl);font-style:italic}
+.hero p{color:rgba(255,255,255,.56);font-size:.98rem;line-height:1.85;margin-bottom:2rem;max-width:440px}
+.ha{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 24px;border-radius:50px;font-family:var(--fb);font-weight:600;font-size:.84rem;text-decoration:none;cursor:pointer;border:none;transition:all .25s;letter-spacing:.04em}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.bg{background:var(--g);color:#fff}.bg:hover{background:var(--gd)}
+.bo{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.bo:hover{background:rgba(255,255,255,.08)}
+.bd{background:var(--b);color:#fff}
+.sm{padding:8px 16px;font-size:.78rem}
+.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+.sn{font-family:var(--ff);font-size:1.8rem;color:#fff;font-weight:700;line-height:1}
+.sl{font-size:.71rem;color:rgba(255,255,255,.36);margin-top:4px}
+
+/* ══ SECTIONS ══ */
+.sec{padding:80px 2.5rem;max-width:1180px;margin:0 auto}
+.stag{display:inline-block;color:var(--gd);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem}
+.st{font-family:var(--ff);font-size:clamp(1.9rem,3vw,2.8rem);color:var(--b);line-height:1.2;font-weight:600}
+.st em{font-style:italic;color:var(--gd)}
+.ss{color:var(--mu);font-size:.95rem;line-height:1.78;margin-top:.6rem;max-width:490px}
+
+/* WHY */
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3.5rem}
+.wi{border-radius:var(--r2);overflow:hidden;position:relative;aspect-ratio:4/5;max-height:500px}
+.phi{width:100%;height:100%;background:linear-gradient(160deg,var(--cd) 0%,#c8b898 60%,var(--gl) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.phi svg{opacity:.18}
+.phi span{color:var(--mu);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.wb{position:absolute;bottom:20px;left:20px;background:var(--b);color:#fff;border-radius:var(--r);padding:14px 18px;font-size:.8rem}
+.wb strong{display:block;font-family:var(--ff);font-size:1.3rem;color:var(--gl)}
+.pills{display:flex;flex-direction:column;gap:.95rem}
+.pill{display:flex;gap:1.1rem;align-items:flex-start;padding:1.2rem;border-radius:var(--r);background:#fff;border:1px solid var(--cd);transition:all .25s}
+.pill:hover{border-color:var(--gl);box-shadow:0 4px 16px rgba(78,122,26,.1)}
+.pico{width:44px;height:44px;border-radius:11px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.pill h3{font-family:var(--ff);font-size:1rem;color:var(--b);margin-bottom:.2rem;font-weight:600}
+.pill p{font-size:.82rem;color:var(--mu);line-height:1.65}
+
+/* BRANDS */
+.brs{background:var(--b);padding:2.8rem 2.5rem}
+.bri{max-width:1180px;margin:0 auto;text-align:center}
+.bri > p{color:rgba(255,255,255,.28);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.4rem}
+.brr{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.bc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.56);font-size:.79rem;font-weight:500;padding:7px 17px;border-radius:50px;transition:all .2s}
+.bc:hover{background:rgba(122,173,58,.2);border-color:rgba(122,173,58,.4);color:#fff}
+
+/* PRODUCTS */
+.pb{background:var(--c2);padding:80px 2.5rem}
+.pi{max-width:1180px;margin:0 auto}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:1.1rem;margin-top:2.5rem}
+.pc{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--cd);transition:all .25s}
+.pc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.09)}
+.pim{aspect-ratio:1;background:linear-gradient(135deg,var(--cd) 0%,var(--g2) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.pim svg{opacity:.18}
+.pim span{font-size:.66rem;color:var(--mu);letter-spacing:.12em;text-transform:uppercase}
+.pin{padding:.85rem}
+.pca{font-size:.67rem;color:var(--g);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem}
+.pna{font-family:var(--ff);font-size:.95rem;font-weight:600;color:var(--b);margin-bottom:.15rem}
+.pde{font-size:.76rem;color:var(--mu);line-height:1.5}
+.ctab{text-align:center;margin-top:2.5rem;background:var(--b);border-radius:var(--r2);padding:2.2rem}
+.ctab h3{font-family:var(--ff);color:#fff;font-size:1.45rem;font-weight:600;margin-bottom:.4rem}
+.ctab p{color:rgba(255,255,255,.38);margin-bottom:1.3rem}
+
+/* REVIEWS */
+.rs{padding:80px 2.5rem;background:#fff}
+.ri{max-width:1180px;margin:0 auto}
+.rh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.gb{display:flex;align-items:center;gap:8px;background:var(--c2);border:1px solid var(--cd);border-radius:50px;padding:7px 15px;font-size:.79rem;color:var(--mu);font-weight:500}
+.cw{overflow:hidden}
+.ct{display:flex;gap:1.1rem;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+.rc{background:var(--cr);border:1px solid var(--cd);border-radius:var(--r2);padding:1.5rem;min-width:310px;max-width:310px;flex-shrink:0}
+.rc:hover{box-shadow:0 6px 24px rgba(0,0,0,.07)}
+.rt{display:flex;align-items:center;gap:10px;margin-bottom:.8rem}
+.ra{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff);font-size:.95rem;font-weight:700;color:#fff;flex-shrink:0}
+.rn{font-weight:600;font-size:.86rem;color:var(--b)}
+.rd{font-size:.7rem;color:var(--li);margin-top:2px}
+.rst{margin-bottom:.65rem;font-size:.98rem;color:#F9A825;letter-spacing:2px}
+.rx{font-size:.84rem;color:var(--mu);line-height:1.75;font-style:italic}
+.rx::before{content:'"';font-family:var(--ff);font-size:2rem;color:var(--gl);line-height:0;vertical-align:-12px;margin-right:2px}
+.cn{display:flex;gap:7px;margin-top:1.4rem;justify-content:center}
+.cd2{width:7px;height:7px;border-radius:50%;background:var(--cd);cursor:pointer;border:none;transition:all .25s}
+.cd2.active{background:var(--g);width:20px;border-radius:4px}
+.car{display:flex;gap:7px}
+.cb{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--cd);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.85rem;color:var(--b)}
+.cb:hover{background:var(--b);color:#fff;border-color:var(--b)}
+
+/* INFO */
+.is{background:var(--b);padding:70px 2.5rem}
+.ii{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.ib h4{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g);font-weight:600;margin-bottom:1rem}
+.ibd{width:34px;height:2px;background:var(--g);margin-bottom:1rem}
+.ib p,.ib a{color:rgba(255,255,255,.5);font-size:.88rem;line-height:1.85;text-decoration:none}
+.ib a:hover{color:#fff}
+.ibp{font-size:1.4rem!important;color:#fff!important;font-family:var(--ff)!important;font-weight:600!important}
+.ht2{width:100%;font-size:.83rem;border-collapse:collapse}
+.ht2 td{color:rgba(255,255,255,.5);padding:3px 0;vertical-align:top}
+.ht2 td:first-child{font-weight:600;color:rgba(255,255,255,.82);padding-right:10px;width:82px}
+.closed{color:rgba(255,255,255,.2)!important}
+.mbtn{display:inline-block;margin-top:1rem;padding:8px 16px;border-radius:50px;background:rgba(255,255,255,.07);color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.15);transition:all .2s}
+.mbtn:hover{background:rgba(122,173,58,.25);border-color:rgba(122,173,58,.38)}
+footer{background:#120505;text-align:center;padding:1.2rem;color:rgba(255,255,255,.2);font-size:.75rem}
+
+/* ══ PEDIDO ══ */
+.ph2{background:var(--b);padding:50px 2.5rem;text-align:center}
+.ph2 h1{font-family:var(--ff);color:#fff;font-size:2.1rem;font-weight:600}
+.ph2 p{color:rgba(255,255,255,.38);margin-top:.5rem}
+.fsec{max-width:780px;margin:-26px auto 50px;padding:0 1.5rem}
+.fc{background:#fff;border-radius:var(--r2);box-shadow:0 8px 44px rgba(0,0,0,.1);padding:2.2rem}
+.fc h2{font-family:var(--ff);color:var(--b);font-size:1.4rem;margin-bottom:1.3rem;padding-bottom:.9rem;border-bottom:2px solid var(--cd);font-weight:600}
+.fg{margin-bottom:.95rem}
+.fg label{display:block;font-weight:600;font-size:.73rem;color:var(--b);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.07em}
+.fg input,.fg select{width:100%;padding:10px 13px;border:1.5px solid var(--cd);border-radius:10px;font-family:var(--fb);font-size:.89rem;color:var(--tx);background:var(--cr);transition:border .2s}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--g)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.nt{background:var(--g2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:10px 14px;font-size:.8rem;color:var(--gd);margin-bottom:1.3rem;font-weight:500}
+.cs h3{font-family:var(--ff);color:var(--b);font-size:1rem;margin-bottom:.8rem;font-weight:600}
+.cs{margin-top:1.7rem}
+.psr{display:grid;grid-template-columns:1fr auto;gap:7px;margin-bottom:.7rem}
+#pre{max-height:200px;overflow-y:auto;border:1.5px solid var(--cd);border-radius:10px;background:#fff;margin-bottom:.4rem}
+.pri{padding:9px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--cd);font-size:.83rem;transition:background .15s}
+.pri:hover{background:var(--g2)}
+.pri:last-child{border-bottom:none}
+.ppr{font-weight:700;color:var(--gd);flex-shrink:0;margin-left:6px}
+.ci{display:flex;align-items:center;background:var(--cr);border-radius:9px;padding:8px 12px;margin-bottom:6px;font-size:.84rem;border:1px solid var(--cd)}
+.cin{flex:1}
+.cina{font-weight:600;color:var(--b)}
+.cinb{color:var(--mu);font-size:.75rem}
+.crm{background:none;border:none;cursor:pointer;color:var(--bl);padding:3px 7px;border-radius:5px}
+.crm:hover{background:#fee;color:#c00}
+.qb{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--g);background:none;color:var(--g);font-weight:700;cursor:pointer;font-size:.85rem}
+.qb:hover{background:var(--g);color:#fff}
+.qty{display:flex;align-items:center;gap:7px;margin:0 10px}
+.ctot{border-top:2px solid var(--cd);margin-top:.9rem;padding-top:.9rem;text-align:right;font-weight:700;color:var(--b)}
+.eca{text-align:center;color:var(--mu);padding:1.3rem;font-size:.84rem}
+.wb2{background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:50px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:all .2s;margin-top:1.3rem}
+.wb2:hover{background:#1DA851;transform:translateY(-2px)}
+
+/* ══ ADMIN ══ */
+.alw{max-width:360px;margin:70px auto;padding:0 1.5rem}
+.alc{background:#fff;border-radius:var(--r2);padding:2.2rem;box-shadow:0 8px 40px rgba(0,0,0,.1);text-align:center}
+.alc h2{font-family:var(--ff);color:var(--b);margin-bottom:.4rem;font-weight:600}
+.alc p{color:var(--mu);font-size:.84rem;margin-bottom:1.3rem}
+.alc input{width:100%;padding:10px 14px;border:1.5px solid var(--cd);border-radius:10px;font-size:.9rem;font-family:var(--fb);color:var(--tx);background:var(--cr);margin-bottom:.85rem}
+.alc input:focus{outline:none;border-color:var(--g)}
+.em{color:#c00;font-size:.78rem;margin-top:.3rem}
+.ato{background:var(--b);padding:16px 2.5rem}
+.atoi{max-width:1150px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.ato h2{font-family:var(--ff);color:#fff;font-size:1.45rem;font-weight:600}
+.aby{max-width:1150px;margin:28px auto;padding:0 1.5rem 50px}
+
+/* ADMIN TABS */
+.tabs{display:flex;gap:3px;margin-bottom:1.4rem;background:var(--cd);border-radius:12px;padding:4px}
+.tab{flex:1;padding:9px;border-radius:9px;border:none;background:none;font-family:var(--fb);font-size:.8rem;font-weight:600;cursor:pointer;color:var(--mu);transition:all .2s}
+.tab.act{background:#fff;color:var(--b);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.tpanel{display:none}.tpanel.act{display:block}
+
+/* PANEL MANUAL */
+.ag{display:grid;grid-template-columns:1fr 1.7fr;gap:1.3rem;align-items:start}
+.ac{background:#fff;border-radius:var(--r2);box-shadow:0 4px 20px rgba(0,0,0,.07);padding:1.5rem}
+.ac h3{font-family:var(--ff);color:var(--b);font-size:1rem;margin-bottom:1rem;padding-bottom:.65rem;border-bottom:2px solid var(--cd);font-weight:600}
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.tbl th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600;color:var(--li);padding:7px 9px;border-bottom:2px solid var(--cd)}
+.tbl td{padding:8px 9px;border-bottom:1px solid var(--cd);color:var(--tx)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--cr)}
+.dbtn{background:none;border:none;cursor:pointer;color:var(--bl);font-size:.78rem;padding:3px 7px;border-radius:4px}
+.dbtn:hover{background:#fee;color:#c00}
+.bco{background:var(--g);color:#fff;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:50px;margin-left:6px}
+.fb2{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.85rem}
+.fb2 button{padding:4px 10px;border-radius:50px;border:1.5px solid var(--cd);background:var(--cr);color:var(--b);font-size:.74rem;cursor:pointer;font-weight:600;transition:all .2s}
+.fb2 button.act{background:var(--g);border-color:var(--g);color:#fff}
+.msgt{text-align:center;margin-top:.5rem;font-size:.78rem}
+.empt{color:var(--mu);font-size:.82rem;text-align:center;padding:1.2rem}
+.srch{border:1.5px solid var(--cd);border-radius:8px;padding:6px 11px;font-size:.78rem;font-family:var(--fb);width:140px;background:var(--cr)}
+.srch:focus{outline:none;border-color:var(--g)}
+
+/* PANEL TXT */
+.txt-info{background:var(--g2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:10px 14px;font-size:.79rem;color:var(--gd);margin-bottom:1rem;line-height:1.65}
+.txt-info code{background:rgba(78,122,26,.18);padding:1px 5px;border-radius:4px;font-size:.76rem;font-family:monospace}
+.txt-info strong{font-weight:700}
+textarea.txta{width:100%;height:380px;font-family:'Courier New',monospace;font-size:.79rem;padding:.9rem;border:1.5px solid var(--cd);border-radius:10px;resize:vertical;background:var(--cr);color:var(--tx);line-height:1.65}
+textarea.txta:focus{outline:none;border-color:var(--g)}
+.txta-wrap{display:flex;gap:8px;margin-top:.85rem;flex-wrap:wrap;align-items:center}
+.sync-note{font-size:.75rem;color:var(--mu);padding:8px 12px;background:var(--c2);border-radius:8px;flex:1;line-height:1.5}
+
+@media(max-width:900px){
+  .wg{grid-template-columns:1fr}.wi{max-height:220px}
+  .ii{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr}
+  .hero-img-panel,.hero-ov{display:none}
+  .hero-content{padding:50px 1.5rem}
+  .lh-contact{display:none}
+}
+@media(max-width:640px){
+  nav{padding:0 1rem}
+  .nav-links a span{display:none}
+  .nav-links a{padding:10px 10px}
+  .sec,.pb,.rs,.is,.brs{padding-left:1.2rem;padding-right:1.2rem}
+  .fr{grid-template-columns:1fr}
+  .rc{min-width:260px;max-width:260px}
+  .logo-header{padding:14px 1.2rem;gap:12px}
+  .logo-header img{height:68px}
+  .lh-text h1{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGO HEADER ══════════ -->
+<header class="logo-header">
+  <img src="Logotipo.png" alt="Sílvia Comercial">
+  <div class="lh-text">
+    <h1>Sílvia Comercial</h1>
+    <p>Perruqueria i Estètica · Caldes de Montbui</p>
+  </div>
+  <div class="lh-contact">
+    <a href="tel:+34647177408" class="lh-phone">📞 +34 647 177 408</a>
+    <a href="https://wa.me/34647177408" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-links">
+    <a href="#" id="n-home" class="active" onclick="go('home')"><span>Inicio</span></a>
+    <a href="#" id="n-pedido" onclick="go('pedido')"><span>Hacer pedido</span></a>
+  </div>
+  <div class="nav-links">
+    <a href="tel:+34647177408" class="nav-cta">📞 <span>Llámanos</span></a>
+  </div>
+</nav>
+
+<!-- ══════════════════ HOME ══════════════════ -->
+<div id="p-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-img-panel">
+      <div class="ph-panel">
+        <!-- ★ Reemplaza por: <img src="interior.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+        <svg width="70" height="70" viewBox="0 0 24 24" fill="white"><path d="M21 6.5c0-2.5-2-4.5-4.5-4.5S12 4 12 6.5V21h3V13h3v8h3V6.5zM9 3H3v18h3v-7h3V3z"/></svg>
+        <span>Foto interior tienda</span>
+      </div>
+    </div>
+    <div class="hero-ov"></div>
+    <div class="hero-content">
+      <div class="hero-tag"><i></i>Distribuidora profesional · Caldes de Montbui</div>
+      <h1>El asesoramiento que<br><em>marca la diferencia</em></h1>
+      <p>No solo vendemos productos — te guiamos para usarlos como una profesional. Más de 20 años de experiencia a tu lado.</p>
+      <div class="ha">
+        <button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button>
+        <button class="btn bo" onclick="document.getElementById('asesoria').scrollIntoView({behavior:'smooth'})">Cómo te ayudamos</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="sn">+20</div><div class="sl">Años de experiencia</div></div>
+        <div><div class="sn">5★</div><div class="sl">Google Reviews</div></div>
+        <div><div class="sn">100%</div><div class="sl">Profesional</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="asesoria">
+    <div class="wg">
+      <div class="wi">
+        <div class="phi">
+          <!-- ★ Reemplaza por: <img src="tienda.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+          <svg width="54" height="54" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M20 4H4v2l8 5 8-5V4zM4 20h16V8l-8 5-8-5v12z"/></svg>
+          <span>Foto interior tienda</span>
+        </div>
+        <div class="wb"><strong>+20</strong><span style="font-size:.76rem;color:rgba(255,255,255,.44)">años asesorando</span></div>
+      </div>
+      <div>
+        <span class="stag">Nuestra especialidad</span>
+        <h2 class="st">Más que una tienda,<br><em>tu asesora de confianza</em></h2>
+        <p class="ss">Silvia lleva décadas ayudando a profesionales y particulares a elegir exactamente lo que necesitan — nunca más, nunca menos.</p>
+        <div class="pills" style="margin-top:1.8rem">
+          <div class="pill"><div class="pico">🎨</div><div><h3>Asesoramiento en tintes</h3><p>Técnica, dosificación, tiempo de exposición, compatibilidad entre marcas. Sin sorpresas ni errores.</p></div></div>
+          <div class="pill"><div class="pico">✨</div><div><h3>Tratamientos y cosmética</h3><p>Keratinas, nutrición capilar, decoloraciones seguras. Cuéntanos el caso y te damos la mejor solución.</p></div></div>
+          <div class="pill"><div class="pico">🛠️</div><div><h3>Herramientas profesionales</h3><p>Secadores, planchas, utensilios de corte... orientación según tu tipo de cliente y volumen de trabajo.</p></div></div>
+          <div class="pill"><div class="pico">📚</div><div><h3>Siempre al día</h3><p>Te informamos de nuevas fórmulas, técnicas y tendencias del sector profesional.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="brs">
+    <div class="bri">
+      <p>Trabajamos con las mejores marcas del mercado profesional</p>
+      <div class="brr" id="brands-row">
+        <span class="bc">Schwarzkopf</span><span class="bc">Wella</span><span class="bc">L'Oréal Professional</span>
+        <span class="bc">Redken</span><span class="bc">Revlon Professional</span><span class="bc">Kerastase</span>
+        <span class="bc">Goldwell</span><span class="bc">Indola</span><span class="bc">Paul Mitchell</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb">
+    <div class="pi">
+      <span class="stag">Nuestro catálogo</span>
+      <h2 class="st">Productos <em>de primera calidad</em></h2>
+      <p class="ss">Seleccionamos cada producto por su rendimiento y fiabilidad en uso profesional.</p>
+      <div class="pg">
+        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M9 3v11c0 2.21 1.79 4 4 4s4-1.79 4-4V3h-2v7h-4V3H9z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Tintes</div><div class="pna">Coloración permanente</div><div class="pde">Cobertura total, larga duración y brillo excepcional</div></div></div>
+        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M17 8C8 10 5.9 16.17 3.82 21h2.71l1-2h3l1 2h2.71C12 16 14.97 9.4 22 9l-5-1z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Decoloración</div><div class="pna">Decolorantes profesionales</div><div class="pde">Acción controlada para resultados seguros y uniformes</div></div></div>
+        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm-1 14H9V8h2v9zm4 0h-2V8h2v9z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Tratamientos</div><div class="pna">Keratinas y nutrición</div><div class="pde">Hidratación profunda y reestructuración capilar</div></div></div>
+        <div class="pc"><div class="pim"><svg width="36" height="36" viewBox="0 0 24 24" fill="#7AAD3A"><path d="M20 6h-1V4c0-1.1-.9-2-2-2H7C5.9 2 5 2.9 5 4v2H4c-1.1 0-2 .9-2 2v4c0 1.65 1.35 3 3 3h1c0 2.21 1.79 4 4 4h4c2.21 0 4-1.79 4-4h1c1.65 0 3-1.35 3-3V8c0-1.1-.9-2-2-2z"/></svg><span>Foto producto</span></div><div class="pin"><div class="pca">Herramientas</div><div class="pna">Equipamiento profesional</div><div class="pde">Secadores, planchas y accesorios de alta gama</div></div></div>
+      </div>
+      <div class="ctab"><h3>¿Necesitas tintes? Haz tu pedido aquí</h3><p>Selecciona del catálogo y lo tendremos listo para recoger cuando quieras.</p><button class="btn bg" onclick="go('pedido')">Hacer pedido de tintes</button></div>
+    </div>
+  </div>
+
+  <section class="rs">
+    <div class="ri">
+      <div class="rh">
+        <div><span class="stag">Opiniones</span><h2 class="st">Lo que dicen<br><em>nuestros clientes</em></h2></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:9px">
+          <div class="gb"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>5.0 · Google Reviews</div>
+          <div class="car"><button class="cb" onclick="mcar(-1)">←</button><button class="cb" onclick="mcar(1)">→</button></div>
+        </div>
+      </div>
+      <div class="cw"><div class="ct" id="ctrack">
+        <div class="rc"><div class="rt"><div class="ra" style="background:#7AAD3A">TB</div><div><div class="rn">Tania Ballesteros</div><div class="rd">Hace unos meses</div></div></div><div class="rst">★★★★★</div><p class="rx">Hace años que Silvia es mi tienda de confianza. No solo me asesora perfecto y me da productos de 10, sino que jamás ha intentado venderme más de lo que necesito. Además es dulce y muy amable. Da igual si me lo traen a casa o si es más barato, yo voy a verla a ella aunque esté en otro pueblo.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#4E7A1A">AG</div><div><div class="rn">Alfredo Gabella</div><div class="rd">Hace un año</div></div></div><div class="rst">★★★★★</div><p class="rx">Excelente profesionalidad. Te ayuda y aconseja lo mejor para ti y los productos más adecuados. Un diez.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#6B2E22">RM</div><div><div class="rn">Raquel Morales</div><div class="rd">Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Muy profesionales y trato excelente, los productos increíbles.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#B0720A">EG</div><div><div class="rn">E. Gabella (gabe95)</div><div class="rd">Local Guide · Hace un año</div></div></div><div class="rst">★★★★★</div><p class="rx">Muy profesionales y personal atento.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#3B6099">EB</div><div><div class="rn">Estela Bernat</div><div class="rd">Local Guide · Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Super amables. Me trajeron un tinte que no encontraba en ningún sitio.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#2E7D6B">IR</div><div><div class="rn">Irene Riego</div><div class="rd">Hace 2 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Trato excepcional!</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#5C3A8A">RG</div><div><div class="rn">Raquel Garcia</div><div class="rd">Hace 3 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Excelente atención y productos.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#7AAD3A">MC</div><div><div class="rn">Myriam Carreras</div><div class="rd">Local Guide · Hace 3 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Me encanta, siempre super bien y tienen de todo. Excelente.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#A0522D">AX</div><div><div class="rn">Alicia Xarau</div><div class="rd">Hace 8 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Por sus productos tan buenos.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#1A6B8A">LM</div><div><div class="rn">Laura Moya Torres</div><div class="rd">Hace 5 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Buenos productos y asesoramiento muy profesionales.</p></div>
+        <div class="rc"><div class="rt"><div class="ra" style="background:#6B4E22">RA</div><div><div class="rn">Ricardo Aparicio Xarau</div><div class="rd">Local Guide · Hace 8 años</div></div></div><div class="rst">★★★★★</div><p class="rx">Por la atención individualizada e información.</p></div>
+      </div></div>
+      <div class="cn" id="cdots"></div>
+    </div>
+  </section>
+
+  <div class="is">
+    <div class="ii">
+      <div class="ib"><div class="ibd"></div><h4>Teléfono</h4><a href="tel:+34647177408" class="ibp">+34 647 177 408</a><p style="margin-top:.9rem">¿Dudas sobre algún producto?<br>Llámanos y te asesoramos.</p><a href="https://wa.me/34647177408" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:1rem;color:#25D366!important;font-weight:600;font-size:.84rem">WhatsApp directo →</a></div>
+      <div class="ib"><div class="ibd"></div><h4>Horario</h4><table class="ht2"><tr><td>Lunes</td><td class="closed">Cerrado</td></tr><tr><td>Martes</td><td>9:30–13:30 / 17:00–20:00</td></tr><tr><td>Miércoles</td><td>9:30–13:30 / 17:00–20:00</td></tr><tr><td>Jueves</td><td>9:30–13:30 / 17:00–20:00</td></tr><tr><td>Viernes</td><td>9:30–13:30 / 17:00–20:00</td></tr><tr><td>Sábado</td><td>10:00–13:30</td></tr><tr><td>Domingo</td><td class="closed">Cerrado</td></tr></table></div>
+      <div class="ib"><div class="ibd"></div><h4>Cómo llegar</h4><p style="color:#fff;font-weight:500;margin-bottom:.3rem">Carrer d'Homs, 1, local 3</p><p>08140 Caldes de Montbui<br>Barcelona</p><a class="mbtn" href="https://maps.google.com/?q=Carrer+d'Homs+1+local+3+Caldes+de+Montbui" target="_blank">📍 Ver en Google Maps</a></div>
+    </div>
+  </div>
+  <footer><p>© 2025 Sílvia Comercial de Perruqueria i Estètica · Caldes de Montbui</p></footer>
+</div>
+
+<!-- ══════════════════ PEDIDO ══════════════════ -->
+<div id="p-pedido" class="page">
+  <div class="ph2"><h1>Hacer un pedido</h1><p>Selecciona los tintes, rellena tus datos y envíanos el pedido por WhatsApp.</p></div>
+  <div class="fsec">
+    <div class="fc">
+      <h2>📋 Datos del pedido</h2>
+      <div class="nt">Una vez enviado, Sílvia lo confirmará y te avisará cuando esté listo para recoger.</div>
+      <div class="fr">
+        <div class="fg"><label>Nombre y apellido *</label><input type="text" id="cname" placeholder="Ej: Maria Garcia"></div>
+        <div class="fg"><label>Fecha de recogida *</label><input type="date" id="pdate"></div>      </div>
+      <div class="fg"><label>Teléfono (opcional)</label><input type="tel" id="cphone" placeholder="Por si hay que contactarte"></div>
+      <div class="fg"><label>Notas adicionales</label><input type="text" id="cnotes" placeholder="Ej: prefiero mañana, alergias..."></div>
+      <div class="cs">
+        <h3>🛒 Busca y añade tintes</h3>
+        <div class="psr">
+          <input type="text" id="sinput" placeholder="Busca por marca, número o gama..." oninput="srch()" style="border:1.5px solid var(--cd);border-radius:10px;padding:9px 13px;font-family:var(--fb);font-size:.86rem;background:var(--cr)">
+          <button class="btn bd sm" onclick="clrS()">✕</button>
+        </div>
+        <div id="pre" style="display:none"></div>
+        <div id="citems"><div class="eca">Busca productos arriba y añádelos al pedido</div></div>
+        <div id="ctot" style="display:none" class="ctot"></div>
+      </div>
+      <a href="#" class="wb2" onclick="sendWA(event)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar pedido por WhatsApp
+      </a>
+      <p style="text-align:center;color:var(--mu);font-size:.77rem;margin-top:.5rem">Se abrirá WhatsApp con el mensaje preparado. Confirma el envío.</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ── CONFIG ──
+const WA_PHONE = '34647177408';
+
+// ── STATE ──
+let prods = [];
+let cart = [];
+let cp = 0;
+let carTimer;
+
+// ── SET TODAY AS MIN DATE ──
+function setMinDate() {
+  const today = new Date().toISOString().split('T')[0];
+  const el = document.getElementById('pdate');
+  if (el) el.min = today;
+}
+
+// ── LOAD PRODUCTS FROM products.txt ──
+async function loadProducts() {
+  try {
+    const r = await fetch('products.txt?v=' + Date.now());
+    if (r.ok) {
+      const txt = await r.text();
+      prods = parseTxt(txt);
+    }
+  } catch(e) { console.warn('products.txt no encontrado'); }
+}
+
+function parseTxt(txt) {
+  const lines = txt.split('\n');
+  const result = [];
+  for (let raw of lines) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    const parts = line.split(';');
+    if (parts.length < 3) continue;
+    const [b, r, n, d, p] = parts.map(x => x.trim());
+    const price = parseFloat(p);
+    if (!b || !n || isNaN(price)) continue;
+    result.push({ id: 'p' + result.length + '_' + b.replace(/\s/g,'') + n.replace(/\W/g,''), b, r: r||'', n, d: d||'', p: price });
+  }
+  return result;
+}
+
+// ── NAV ──
+function go(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('p-' + name).classList.add('active');
+  const l = document.getElementById('n-' + name);
+  if (l) l.classList.add('active');
+  if (name === 'pedido') { renderCart(); setMinDate(); }
+  window.scrollTo(0, 0);
+}
+
+// ── CAROUSEL ──
+function initCar() {
+  const cards = document.querySelectorAll('.rc');
+  const dots = document.getElementById('cdots');
+  dots.innerHTML = '';
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'cd2' + (i === 0 ? ' active' : '');
+    d.onclick = () => { cp = i; updCar(); };
+    dots.appendChild(d);
+  });
+  updCar();
+  clearInterval(carTimer);
+  carTimer = setInterval(() => { cp = (cp + 1) % cards.length; updCar(); }, 5500);
+}
+function updCar() {
+  const track = document.getElementById('ctrack');
+  const card = track.querySelector('.rc');
+  if (!card) return;
+  track.style.transform = `translateX(-${cp * (card.offsetWidth + 17)}px)`;
+  document.querySelectorAll('.cd2').forEach((d, i) => d.classList.toggle('active', i === cp));
+}
+function mcar(d) {
+  const n = document.querySelectorAll('.rc').length;
+  cp = Math.max(0, Math.min(n - 1, cp + d));
+  updCar();
+}
+
+// ── SEARCH & CART ──
+function srch() {
+  const q = document.getElementById('sinput').value.toLowerCase().trim();
+  const box = document.getElementById('pre');
+  if (!q) { box.style.display = 'none'; return; }
+  const res = prods.filter(p => (p.b + ' ' + p.r + ' ' + p.n + ' ' + p.d).toLowerCase().includes(q));
+  box.innerHTML = !res.length
+    ? '<div class="pri" style="color:var(--mu)">Sin resultados para "' + q + '"</div>'
+    : res.slice(0, 20).map(p =>
+        `<div class="pri" onclick="addC('${p.id}')">
+          <span><strong>${p.b}</strong>${p.r ? ' · ' + p.r : ''} <b style="color:var(--gd)">${p.n}</b>${p.d ? ' — ' + p.d : ''}</span>
+          <span class="ppr">${p.p.toFixed(2)} €</span>
+        </div>`).join('');
+  box.style.display = 'block';
+}
+function clrS() { document.getElementById('sinput').value = ''; document.getElementById('pre').style.display = 'none'; }
+function addC(id) {
+  const p = prods.find(x => x.id === id); if (!p) return;
+  const ex = cart.find(x => x.id === id);
+  if (ex) ex.q++; else cart.push({ ...p, q: 1 });
+  clrS(); renderCart();
+}
+function remC(id) { cart = cart.filter(x => x.id !== id); renderCart(); }
+function chgQ(id, d) {
+  const it = cart.find(x => x.id === id); if (!it) return;
+  it.q += d; if (it.q <= 0) cart = cart.filter(x => x.id !== id);
+  renderCart();
+}
+function renderCart() {
+  const el = document.getElementById('citems'), tot = document.getElementById('ctot');
+  if (!cart.length) { el.innerHTML = '<div class="eca">Busca productos arriba y añádelos al pedido</div>'; tot.style.display = 'none'; return; }
+  el.innerHTML = cart.map(it =>
+    `<div class="ci">
+      <div class="cin" style="flex:1"><div class="cina">${it.b}${it.r ? ' · ' + it.r : ''} ${it.n}</div><div class="cinb">${it.d || ''} · ${it.p.toFixed(2)} €/u</div></div>
+      <div class="qty"><button class="qb" onclick="chgQ('${it.id}',-1)">−</button><span style="font-weight:700;min-width:16px;text-align:center">${it.q}</span><button class="qb" onclick="chgQ('${it.id}',1)">+</button></div>
+      <span style="font-weight:700;color:var(--b);min-width:50px;text-align:right">${(it.p * it.q).toFixed(2)} €</span>
+      <button class="crm" onclick="remC('${it.id}')">✕</button>
+    </div>`).join('');
+  const total = cart.reduce((s, it) => s + it.p * it.q, 0);
+  tot.style.display = 'block';
+  tot.innerHTML = `Total estimado: <span style="color:var(--gd);font-size:1.05rem">${total.toFixed(2)} €</span>`;
+}
+function sendWA(e) {
+  e.preventDefault();
+  const name = document.getElementById('cname').value.trim();
+  const date = document.getElementById('pdate').value;
+  const phone = document.getElementById('cphone').value.trim();
+  const notes = document.getElementById('cnotes').value.trim();
+  if (!name) { alert('Por favor, introduce tu nombre.'); return; }
+  if (!date) { alert('Por favor, selecciona la fecha de recogida.'); return; }
+  if (!cart.length) { alert('Añade al menos un producto al pedido.'); return; }
+  const df = new Date(date).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  let msg = `🌿 *NUEVO PEDIDO — Sílvia Comercial*\n\n👤 *Cliente:* ${name}\n`;
+  if (phone) msg += `📱 *Teléfono:* ${phone}\n`;
+  msg += `📅 *Recogida:* ${df}\n\n🛒 *Productos:*\n`;
+  cart.forEach(it => { msg += `  • ${it.b}${it.r ? ' ' + it.r : ''} ${it.n}${it.d ? ' (' + it.d + ')' : ''} × ${it.q} → ${(it.p * it.q).toFixed(2)} €\n`; });
+  msg += `\n💰 *Total estimado:* ${cart.reduce((s, it) => s + it.p * it.q, 0).toFixed(2)} €`;
+  if (notes) msg += `\n📝 *Notas:* ${notes}`;
+  window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadProducts();
+  setMinDate();
+  initCar();
+  window.addEventListener('resize', updCar);
+});
+
+</script>
+</script>
+</body>
+</html>

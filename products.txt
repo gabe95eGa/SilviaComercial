@@ -1,0 +1,34 @@
+# CATÁLOGO SÍLVIA COMERCIAL
+# Formato: MARCA;GAMA;NUMERO;DESCRIPCION;PRECIO
+# Las líneas que empiezan con # son comentarios (se ignoran)
+# La GAMA y DESCRIPCION son opcionales (pueden estar vacías)
+# Ejemplo: Schwarzkopf;Igora Royal;7/1;Rubio Medio Ceniza;8.50
+
+Schwarzkopf;Igora Royal;1/0;Negro Natural;8.50
+Schwarzkopf;Igora Royal;3/0;Castaño Oscuro Natural;8.50
+Schwarzkopf;Igora Royal;4/0;Castaño Medio Natural;8.50
+Schwarzkopf;Igora Royal;5/0;Castaño Claro Natural;8.50
+Schwarzkopf;Igora Royal;6/0;Rubio Oscuro Natural;8.50
+Schwarzkopf;Igora Royal;7/0;Rubio Medio Natural;8.50
+Schwarzkopf;Igora Royal;7/1;Rubio Medio Ceniza;8.50
+Schwarzkopf;Igora Royal;7/3;Rubio Medio Dorado;8.50
+Schwarzkopf;Igora Royal;8/0;Rubio Claro Natural;8.50
+Schwarzkopf;Igora Royal;9/0;Rubio Muy Claro Natural;8.50
+Schwarzkopf;Igora Royal;10/0;Rubio Extra Claro Natural;8.50
+Wella;Color Touch;5/0;Castaño Claro;7.90
+Wella;Color Touch;6/0;Rubio Oscuro;7.90
+Wella;Color Touch;7/0;Rubio Medio;7.90
+Wella;Color Touch;7/3;Rubio Medio Dorado;7.90
+Wella;Color Touch;8/0;Rubio Claro;7.90
+Wella;Koleston Perfect;5/1;Castaño Claro Ceniza;9.20
+Wella;Koleston Perfect;6/1;Rubio Oscuro Ceniza;9.20
+Wella;Koleston Perfect;7/1;Rubio Ceniza;9.20
+L'Oréal Professional;Majirel;5;Castaño Claro;8.80
+L'Oréal Professional;Majirel;6;Rubio Oscuro;8.80
+L'Oréal Professional;Majirel;7;Rubio;8.80
+L'Oréal Professional;Majirel;7.1;Rubio Ceniza;8.80
+L'Oréal Professional;Majirel;8;Rubio Claro;8.80
+Revlon Professional;Revlonissimo;4;Castaño Medio;7.50
+Revlon Professional;Revlonissimo;5;Castaño Claro;7.50
+Revlon Professional;Revlonissimo;6;Rubio Oscuro;7.50
+Revlon Professional;Revlonissimo;7;Rubio;7.50
