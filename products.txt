@@ -1,8 +1,10 @@
 # CATÁLOGO SÍLVIA COMERCIAL
-# Formato: MARCA;GAMA;NUMERO;DESCRIPCION;PRECIO
+# Formato: MARCA;GAMA;NUMERO;DESCRIPCION;PRECIO;TIPO
 # Las líneas que empiezan con # son comentarios (se ignoran)
 # La GAMA y DESCRIPCION son opcionales (pueden estar vacías)
-# Ejemplo: Schwarzkopf;Igora Royal;7/1;Rubio Medio Ceniza;8.50
+# El PRECIO puede quedar vacio si se confirma en tienda
+# El TIPO es opcional. Ejemplo: tinte, oxidante
+# Ejemplo: Schwarzkopf;Igora Royal;7/1;Rubio Medio Ceniza;8.50;tinte
 
 Schwarzkopf;Igora Royal;1/0;Negro Natural;8.50
 Schwarzkopf;Igora Royal;3/0;Castaño Oscuro Natural;8.50
@@ -32,3 +34,6 @@ Revlon Professional;Revlonissimo;4;Castaño Medio;7.50
 Revlon Professional;Revlonissimo;5;Castaño Claro;7.50
 Revlon Professional;Revlonissimo;6;Rubio Oscuro;7.50
 Revlon Professional;Revlonissimo;7;Rubio;7.50
+Schwarzkopf;Igora Royal Oil Developer;Vol. 20 (6%);Oxidante recomendado en algunos servicios de color;1.00;oxidante
+Schwarzkopf;Igora Royal Oil Developer;Vol. 30 (9%);Oxidante recomendado en algunos servicios de color;1.00;oxidante
+Schwarzkopf;Igora Royal Oil Developer;Vol. 40 (12%);Oxidante recomendado en algunos servicios de color;1.00;oxidante
