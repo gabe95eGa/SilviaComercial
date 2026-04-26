@@ -668,19 +668,23 @@ function renderCatalog() {
   const items = baseProducts();
   const brands = uniqueValues(items, 'b');
   if (!brands.length) return;
-  if (!selectedBrand || !brands.includes(selectedBrand)) selectedBrand = brands[0];
+  if (selectedBrand && !brands.includes(selectedBrand)) selectedBrand = '';
   const brandSelect = document.getElementById('brand-select');
   const productSelect = document.getElementById('product-select');
-  const brandItems = items.filter(p => p.b === selectedBrand);
-  brandSelect.innerHTML = brands.map(brand => `<option value="${brand}">${brand}</option>`).join('');
+  const brandItems = selectedBrand ? items.filter(p => p.b === selectedBrand) : [];
+  brandSelect.innerHTML = ['<option value="">Selecciona una marca</option>'].concat(
+    brands.map(brand => `<option value="${brand}">${brand}</option>`)
+  ).join('');
   brandSelect.value = selectedBrand;
   if (!brandItems.some(p => p.id === selectedProductId)) {
-    selectedProductId = brandItems[0]?.id || '';
+    selectedProductId = '';
   }
-  productSelect.innerHTML = brandItems.map(p =>
-    `<option value="${p.id}">${p.r ? p.r + ' - ' : ''}${p.n} - ${p.d || 'Sin descripción'} - ${formatPrice(p.p)}</option>`
+  productSelect.innerHTML = ['<option value="">Selecciona un producto</option>'].concat(
+    brandItems.map(p =>
+      `<option value="${p.id}">${p.r ? p.r + ' - ' : ''}${p.n} - ${p.d || 'Sin descripción'} - ${formatPrice(p.p)}</option>`
+    )
   ).join('');
-  if (selectedProductId) productSelect.value = selectedProductId;
+  productSelect.value = selectedProductId;
 }
 
 function renderOxidants() {
