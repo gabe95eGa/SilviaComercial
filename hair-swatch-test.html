@@ -195,6 +195,14 @@ a{color:inherit}
   mask-position:center;
   mask-repeat:no-repeat;
 }
+.swatch.is-canvas{
+  background:linear-gradient(135deg,#f5eee3,#d8caba);
+}
+.swatch canvas{
+  display:block;
+  width:100%;
+  height:100%;
+}
 .big-code{
   font-size:2rem;
   font-weight:800;
@@ -220,7 +228,7 @@ a{color:inherit}
 }
 .compare{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:16px;
   margin:6px 0 18px;
 }
@@ -310,9 +318,9 @@ a{color:inherit}
           <a class="btn primary" href="index.html#p-pedido" onclick="sessionStorage.setItem('silvia-open-order','1')">Ir al pedido</a>
         </div>
       </div>
-      <p>Esta prueba usa una sola textura de pelo en escala de grises y la tine dinamicamente a partir de nivel + reflejo. La mezcla por defecto ya no trabaja en RGB clasico: ahora usamos una mezcla perceptual tipo Oklab para conservar mejor la sensacion de luz y matiz sobre el mechon.</p>
+      <p>Esta prueba usa una sola textura de pelo en escala de grises y la tine dinamicamente a partir de nivel + reflejo. El color base se calcula en Oklab y el modo realista procesa la textura pixel a pixel para conservar mejor la sensacion de luz, sombra y matiz sobre el mechon.</p>
       <div class="notice" id="texture-notice">
-        Textura cargada desde <code>img/hair-texture-test.png</code> con canal alpha. La capa de color se aplica sobre la propia silueta del PNG con <code>background-blend-mode</code>, para mantener sombras y brillos sin depender de una mascara separada.
+        Textura cargada desde <code>img/hair-texture-test.png</code> con canal alpha. El modo realista procesa el PNG en canvas pixel a pixel: conserva la silueta, colorea sombras, medios tonos y brillos con matices distintos, y anade una variacion ligera por mechon.
       </div>
     </div>
 
@@ -332,14 +340,16 @@ a{color:inherit}
             <label for="reflect">Reflejo</label>
             <select id="reflect"></select>
           </div>
+          <!-- Recuperacion posible: antiguo selector de metodo de mezcla.
           <div class="field">
             <label for="mixMode">Metodo de mezcla</label>
             <select id="mixMode">
-              <option value="oklab">Perceptual (recomendado)</option>
+              <option value="realistic">Realista por textura (recomendado)</option>
+              <option value="oklab">Mezcla perceptual</option>
               <option value="rgb">RGB clasico</option>
             </select>
-            <div class="hint">Oklab suele mantener mejor la luz aparente del cabello que una mezcla RGB directa.</div>
           </div>
+          -->
           <div class="field">
             <label for="reflectStrength">Intensidad del reflejo</label>
             <input id="reflectStrength" type="range" min="0" max="0.5" step="0.01" value="0.28">
@@ -352,6 +362,11 @@ a{color:inherit}
             <label for="chromaSoft">Suavizar saturacion</label>
             <input id="chromaSoft" type="range" min="0" max="0.4" step="0.01" value="0.12">
             <div class="hint">Un poco de suavizado evita que el mechon quede demasiado plano o artificial.</div>
+          </div>
+          <div class="field">
+            <label for="shine">Brillo de fibra</label>
+            <input id="shine" type="range" min="0" max="0.45" step="0.01" value="0.22">
+            <div class="hint">Aumenta la lectura de mechones claros y el acabado de peluqueria sin cambiar el HEX base.</div>
           </div>
         </div>
         <div class="meta">
@@ -366,7 +381,7 @@ a{color:inherit}
           <div class="swatch" id="mainSwatch"></div>
           <div>
             <div class="big-code" id="shadeCode">7.1</div>
-            <p id="shadeLabel">Rubio medio ceniza. Ajusta el reflejo y compara la mezcla perceptual frente a RGB para ver cual mantiene mejor el volumen y la lectura del tono.</p>
+            <p id="shadeLabel">Rubio medio ceniza. Ajusta el reflejo y el brillo para acercar la aproximacion visual a una carta real sin perder textura.</p>
             <div class="hex-box">
               <div class="hex-chip">Base: <strong id="heroBaseHex">-</strong></div>
               <div class="hex-chip">Reflejo: <strong id="heroReflectHex">-</strong></div>
@@ -376,6 +391,7 @@ a{color:inherit}
         </div>
 
         <div class="compare">
+          <!-- Recuperacion posible: antigua comparativa de metodo perceptual.
           <article class="compare-card">
             <div class="compare-top">
               <div>
@@ -386,6 +402,8 @@ a{color:inherit}
               <div class="swatch mini-swatch" id="oklabSwatch"></div>
             </div>
           </article>
+          -->
+          <!-- Recuperacion posible: antigua comparativa RGB basica.
           <article class="compare-card">
             <div class="compare-top">
               <div>
@@ -396,6 +414,7 @@ a{color:inherit}
               <div class="swatch mini-swatch" id="rgbSwatch"></div>
             </div>
           </article>
+          -->
         </div>
 
         <h2 class="section-title">Muestras rapidas</h2>
@@ -406,6 +425,7 @@ a{color:inherit}
 
 <script>
 const textureUrl = "img/hair-texture-test.png";
+const textureImagePromise = loadTextureImage(textureUrl);
 
 const colorDb = {
   brands: {
@@ -463,6 +483,16 @@ function rgbToHex({ r, g, b }) {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
+function clamp(value, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function smoothstep(edge0, edge1, value) {
+  const x = clamp((value - edge0) / (edge1 - edge0));
+  return x * x * (3 - 2 * x);
+}
+
+/* Recuperacion posible: antiguo mezclador RGB basico.
 function mixRgb(a, b, t) {
   return {
     r: a.r + (b.r - a.r) * t,
@@ -470,6 +500,7 @@ function mixRgb(a, b, t) {
     b: a.b + (b.b - a.b) * t
   };
 }
+*/
 
 function darkenRgb(rgb, amount) {
   return {
@@ -543,6 +574,15 @@ function mixOklab(aRgb, bRgb, t, chromaSoft) {
   return oklabToRgb(mixed);
 }
 
+function loadTextureImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = src;
+  });
+}
+
 function getBrand() {
   return colorDb.brands[document.getElementById("brand").value];
 }
@@ -553,9 +593,13 @@ function getResultHex(levelCode, reflectCode, reflectStrength, darken, chromaSof
   const reflectHex = brand.reflects[reflectCode].hex;
   const baseRgb = hexToRgb(baseHex);
   const reflectRgb = hexToRgb(reflectHex);
-  const mixed = mode === "rgb"
+  /* Recuperacion posible: antiguo switch de mezcla RGB basica.
+  const colorMode = mode === "rgb" ? "rgb" : "oklab";
+  const mixed = colorMode === "rgb"
     ? mixRgb(baseRgb, reflectRgb, reflectStrength)
     : mixOklab(baseRgb, reflectRgb, reflectStrength, chromaSoft);
+  */
+  const mixed = mixOklab(baseRgb, reflectRgb, reflectStrength, chromaSoft);
   const shaded = darkenRgb(mixed, darken);
   return {
     baseHex,
@@ -573,12 +617,103 @@ function swatchBackground(hex) {
   `;
 }
 
-function paintSwatch(id, hex) {
-  const swatch = document.getElementById(id);
+function getReflectMaterial(reflectCode) {
+  const materials = {
+    "0": { warmth: 0.006, copper: 0.000, cool: 0.000, gloss: 0.00 },
+    "1": { warmth: -0.012, copper: -0.002, cool: 0.026, gloss: 0.03 },
+    "2": { warmth: -0.004, copper: -0.014, cool: 0.010, gloss: -0.01 },
+    "3": { warmth: 0.030, copper: 0.006, cool: -0.006, gloss: 0.04 },
+    "4": { warmth: 0.036, copper: 0.030, cool: -0.004, gloss: 0.02 },
+    "5": { warmth: 0.010, copper: 0.026, cool: 0.012, gloss: -0.01 },
+    "6": { warmth: 0.012, copper: 0.040, cool: 0.006, gloss: 0.00 }
+  };
+  return materials[reflectCode] || materials["0"];
+}
+
+function drawContain(ctx, image, width, height) {
+  const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+  const drawWidth = image.naturalWidth * scale;
+  const drawHeight = image.naturalHeight * scale;
+  const x = (width - drawWidth) / 2;
+  const y = (height - drawHeight) / 2;
+  ctx.clearRect(0, 0, width, height);
+  ctx.drawImage(image, x, y, drawWidth, drawHeight);
+}
+
+function renderRealisticSwatch(swatch, hex, settings) {
+  const canvas = swatch.querySelector("canvas") || document.createElement("canvas");
+  if (!canvas.parentNode) swatch.appendChild(canvas);
+  swatch.classList.add("is-canvas");
+
+  const width = swatch.classList.contains("mini-swatch") ? 220 : 360;
+  const height = Math.round(width * 4 / 3);
+  canvas.width = width;
+  canvas.height = height;
+
+  textureImagePromise.then((image) => {
+    const source = document.createElement("canvas");
+    source.width = width;
+    source.height = height;
+    const sourceCtx = source.getContext("2d", { willReadFrequently: true });
+    drawContain(sourceCtx, image, width, height);
+
+    const sourceImage = sourceCtx.getImageData(0, 0, width, height);
+    const out = new ImageData(width, height);
+    const baseLab = rgbToOklab(hexToRgb(hex));
+    const material = getReflectMaterial(settings.reflect);
+    const shine = settings.shine + material.gloss;
+
+    for (let y = 0; y < height; y++) {
+      const vertical = y / Math.max(1, height - 1);
+      for (let x = 0; x < width; x++) {
+        const i = (y * width + x) * 4;
+        const alpha = sourceImage.data[i + 3] / 255;
+        if (alpha < 0.02) {
+          out.data[i + 3] = 0;
+          continue;
+        }
+
+        const luma = (
+          sourceImage.data[i] * 0.2126 +
+          sourceImage.data[i + 1] * 0.7152 +
+          sourceImage.data[i + 2] * 0.0722
+        ) / 255;
+        const fiber = Math.sin(x * 0.11 + y * 0.027) * 0.018 + Math.sin(x * 0.034 - y * 0.061) * 0.012;
+        const shadow = 1 - smoothstep(0.16, 0.56, luma);
+        const highlight = smoothstep(0.62, 0.96, luma);
+        const mid = 1 - Math.abs(luma - 0.52) * 1.6;
+        const rootDepth = smoothstep(0.58, 1, vertical) * 0.035;
+
+        const lab = {
+          L: clamp(baseLab.L * (0.48 + luma * 0.92) + highlight * shine * 0.18 - shadow * 0.10 - rootDepth + fiber, 0, 1),
+          a: baseLab.a * (0.92 + clamp(mid, 0, 1) * 0.16 - highlight * 0.22 - shadow * 0.10) + material.copper * clamp(mid, 0, 1) - material.cool * shadow * 0.18,
+          b: baseLab.b * (0.94 + clamp(mid, 0, 1) * 0.14 - highlight * 0.18 - shadow * 0.08) + material.warmth * highlight - material.cool * shadow
+        };
+
+        const rgb = oklabToRgb(lab);
+        out.data[i] = clamp(rgb.r, 0, 255);
+        out.data[i + 1] = clamp(rgb.g, 0, 255);
+        out.data[i + 2] = clamp(rgb.b, 0, 255);
+        out.data[i + 3] = Math.round(alpha * 255);
+      }
+    }
+
+    canvas.getContext("2d").putImageData(out, 0, 0);
+  }).catch(() => {
+    swatch.classList.remove("is-canvas");
+  });
+}
+
+function paintSwatchElement(swatch, hex, settings) {
   swatch.style.setProperty("--shade", hex);
   swatch.style.setProperty("--texture-url", `url('${textureUrl}')`);
   swatch.style.setProperty("--tint-layer", `linear-gradient(${hex}, ${hex})`);
   swatch.style.backgroundImage = swatchBackground(hex);
+  renderRealisticSwatch(swatch, hex, settings);
+}
+
+function paintSwatch(id, hex, settings) {
+  paintSwatchElement(document.getElementById(id), hex, settings);
 }
 
 function readSettings() {
@@ -589,7 +724,8 @@ function readSettings() {
     reflectStrength: parseFloat(document.getElementById("reflectStrength").value),
     darken: parseFloat(document.getElementById("darken").value),
     chromaSoft: parseFloat(document.getElementById("chromaSoft").value),
-    mode: document.getElementById("mixMode").value
+    shine: parseFloat(document.getElementById("shine").value),
+    mode: "realistic"
   };
 }
 
@@ -603,6 +739,8 @@ function updateMain() {
     settings.chromaSoft,
     settings.mode
   );
+  paintSwatch("mainSwatch", chosen.resultHex, settings);
+  /* Recuperacion posible: antigua comparativa de metodo perceptual.
   const perceptual = getResultHex(
     settings.level,
     settings.reflect,
@@ -611,6 +749,9 @@ function updateMain() {
     settings.chromaSoft,
     "oklab"
   );
+  paintSwatch("oklabSwatch", perceptual.resultHex, { ...settings, mode: "oklab" });
+  */
+  /* Recuperacion posible: antigua muestra RGB basica.
   const rgb = getResultHex(
     settings.level,
     settings.reflect,
@@ -619,10 +760,8 @@ function updateMain() {
     settings.chromaSoft,
     "rgb"
   );
-
-  paintSwatch("mainSwatch", chosen.resultHex);
-  paintSwatch("oklabSwatch", perceptual.resultHex);
-  paintSwatch("rgbSwatch", rgb.resultHex);
+  paintSwatch("rgbSwatch", rgb.resultHex, { ...settings, mode: "rgb" });
+  */
 
   document.getElementById("baseHex").textContent = chosen.baseHex;
   document.getElementById("reflectHex").textContent = chosen.reflectHex;
@@ -630,8 +769,12 @@ function updateMain() {
   document.getElementById("heroBaseHex").textContent = chosen.baseHex;
   document.getElementById("heroReflectHex").textContent = chosen.reflectHex;
   document.getElementById("heroResultHex").textContent = chosen.resultHex;
+  /* Recuperacion posible: antiguo chip perceptual.
   document.getElementById("oklabHex").textContent = perceptual.resultHex;
+  */
+  /* Recuperacion posible: antiguo chip RGB basico.
   document.getElementById("rgbHex").textContent = rgb.resultHex;
+  */
   document.getElementById("shadeCode").textContent = `${settings.level}.${settings.reflect}`;
   document.getElementById("shadeLabel").textContent = `${settings.brand.levels[settings.level].name} ${settings.brand.reflects[settings.reflect].name.toLowerCase()}. Ajusta la mezcla para ver si la aproximacion visual se acerca a la carta real sin perder textura.`;
 }
@@ -651,13 +794,20 @@ function renderSamples() {
     );
     return `
       <article class="card">
-        <div class="swatch" style="--shade:${resultHex};--texture-url:url('${textureUrl}');--tint-layer:linear-gradient(${resultHex}, ${resultHex});background-image:${swatchBackground(resultHex)}"></div>
+        <div class="swatch sample-swatch" data-hex="${resultHex}" data-level="${sample.level}" data-reflect="${sample.reflect}" style="--shade:${resultHex};--texture-url:url('${textureUrl}');--tint-layer:linear-gradient(${resultHex}, ${resultHex});background-image:${swatchBackground(resultHex)}"></div>
         <div class="name">${sample.level}.${sample.reflect}</div>
         <p class="desc">${settings.brand.levels[sample.level].name} - ${settings.brand.reflects[sample.reflect].name}</p>
         <div class="chip">${resultHex}</div>
       </article>
     `;
   }).join("");
+  grid.querySelectorAll(".sample-swatch").forEach((swatch) => {
+    paintSwatchElement(swatch, swatch.dataset.hex, {
+      ...settings,
+      level: swatch.dataset.level,
+      reflect: swatch.dataset.reflect
+    });
+  });
 }
 
 function populateControls() {
@@ -685,19 +835,16 @@ function populateControls() {
   document.getElementById("reflectStrength").value = brand.blendProfile.reflectStrength;
   document.getElementById("darken").value = brand.blendProfile.darken;
   document.getElementById("chromaSoft").value = brand.blendProfile.chromaSoft;
-  document.getElementById("mixMode").value = "oklab";
+  document.getElementById("shine").value = "0.22";
+  /* Recuperacion posible: antiguo selector de metodo.
+  document.getElementById("mixMode").value = "realistic";
+  */
 }
 
 async function checkTexture() {
   const notice = document.getElementById("texture-notice");
   try {
-    const textureRes = await fetch(textureUrl, { method: "HEAD" });
-    if (!textureRes.ok) {
-      notice.style.background = "#fff7e8";
-      notice.style.borderColor = "#e3d4b6";
-      notice.style.color = "#6b5122";
-      notice.innerHTML = 'Falta <code>img/hair-texture-test.png</code>. Para ver bien el mechon con alpha, ese PNG tiene que estar dentro de la carpeta <code>img</code>.';
-    }
+    await textureImagePromise;
   } catch (e) {
     notice.style.background = "#fff7e8";
     notice.style.borderColor = "#e3d4b6";
@@ -707,7 +854,7 @@ async function checkTexture() {
 }
 
 function bindEvents() {
-  ["brand", "level", "reflect", "mixMode", "reflectStrength", "darken", "chromaSoft"].forEach((id) => {
+  ["brand", "level", "reflect", "reflectStrength", "darken", "chromaSoft", "shine"].forEach((id) => {
     document.getElementById(id).addEventListener("input", () => {
       updateMain();
       renderSamples();
